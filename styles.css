@@ -1,0 +1,368 @@
+.node {
+    fill: #6699CC;
+    /* stroke: #f9f0e1; parchment color*/
+    stroke: #ffffff;
+    stroke-width: 1.5px;
+}
+
+.link {
+    stroke: #454545;
+    stroke-opacity: 0.6;
+}
+
+.tophalfcontainer {
+    display: flex;
+    justify-content: start;   /* align items to the start, i.e., left side */
+    align-items: start;       /* align items to the top */
+}
+
+#network {
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    background-color: #fefefe;  /* a light background */
+}
+
+#graphContainer {
+    position: relative;
+    width: 0px; /* dimensions set by visualnetwork.js */
+    height: 0px;
+    background-color: transparent; /* temporary background color */
+}
+
+#agario {
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    background-color: #fefefe;  /* a light background */
+    margin-right: 5px;
+}
+
+#agarioContainer h3, #graphContainer h3 {
+    text-align: center;
+}
+
+/* Button Container */
+.button-container {
+    display: flex;
+    /*justify-content: center;*/ /*Decides the button's horizontal position*/
+    margin-top: 20px; /* Spacing between the graph and buttons */
+    justify-content: left
+}
+
+/* Button Styles */
+.graph-button {
+    background-color: #6699CC;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 0 5px; /* Space between buttons */
+    padding: 10px 20px; /* Button padding */
+    transition: background-color 0.3s ease; /* Smooth color transition */
+}
+
+.graph-button:hover {
+    background-color: #4a7aa6; /* Darker shade for hover effect */
+}
+
+.graph-button:active {
+    background-color: #3c6889; /* Even darker shade for active/click effect */
+}
+
+.dropdown-container {
+    width: 250px;
+    font-family: Arial, sans-serif;
+    position: relative;
+    border: 2px solid #ccc;
+    padding: 10px;
+    border-radius: 7px;
+    background-color: #ffffff;  /* Pure white background */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* subtle shadow for depth */
+}
+
+.dropdown-title {
+    font-size: 12px;
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+    text-align: center;
+    color: #555;
+    letter-spacing: 0.5px; /* Light letter-spacing for elegance */
+}
+
+.select-container {
+    position: relative;
+}
+
+#connectionSetup {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: 1px solid #ddd;  /* Lighter border color */
+    border-radius: 7px;
+    background-color: #ffffff;  /* Light grayish background for contrast */
+    color: #555;
+    transition: background-color 0.3s, border 0.3s; /* Smooth transitions */
+}
+
+#connectionSetup:hover {
+    background-color: #eaeaea;
+    border-color: #bbb;
+}
+
+/* Hide default dropdown arrow for IE/Edge */
+#connectionSetup::-ms-expand {
+    display: none;
+}
+
+/* Custom dropdown arrow */
+.select-container::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    width: 10px;
+    height: 6px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="6" viewBox="0 0 10 6"><path d="M0 0L10 0L5 6z" fill="%23777"/></svg>');
+    pointer-events: none;
+}
+
+.slider-container {
+    width: 250px;
+    height: 70px;
+    font-family: Arial, sans-serif;
+    position: relative;
+    border: 2px solid #ccc;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #ffffff;
+}
+
+.slider-title {
+    font-size: 12px;
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+    text-align: center;
+    color: #555;
+    letter-spacing: 0.5px; /* Light letter-spacing for elegance */
+}
+
+.slider-value {
+    font-size: 12px;
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    color: #555;
+}
+
+.slider {
+    width: 90%;
+    left: 10;
+    margin: 0 auto;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: #E0E0E0;
+    height: 4px;
+    border-radius: 3px;
+    outline: none;
+    border: none;
+    position: absolute;
+    bottom: 23px;
+}
+
+.slider::-webkit-slider-thumb {
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    background-color: #555;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 15px;
+    height: 15px;
+    background-color: #555;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/*KEY STYLING*/
+#keyButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #f7f7f7;
+    border: 1px solid #ccc;
+    border-radius: 3px; 
+    padding: 5px 10px;
+    cursor: pointer;
+    z-index: 0;  /* This ensures the button is layered above the graph*/
+    outline:none;
+}
+#keyButton:hover {
+    background-color: #eaeaea; /* Slightly lighter shade on hover */
+}
+
+#legend {
+    display: none;
+    position: absolute;
+    top: 45px;  /* Placed below the button*/
+    right: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid #ccc;
+    border-radius: 3px; 
+    padding: 10px;
+    z-index: 9;  /* Below the button, but still above the graph*/
+}
+
+#ui-popup {
+    /* width: 220px; */
+    display: none;
+    border: 1px solid #aaa;
+    border-radius: 3px;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 10px;
+    position: relative;
+    left: 50;
+    top: 50;
+}
+
+#node-info { /*This is for the node popup box*/
+    padding-right: 23px;  /* Adjust this value to your desired padding */
+    padding-left: 3px;
+    margin: 5px 0;
+}
+
+
+.close-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: none;
+    border: none;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.close-button:hover {
+    color: #999;  /* Light gray when hovered */
+}
+
+#closeButton:focus {
+    outline: none;
+}
+
+#arrow {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    position: absolute;
+    --arrowlength: 10px;
+    --color: #909090;
+}
+
+[data-popper-placement^="top"] > #arrow {
+    border-width: var(--arrowlength) var(--arrowlength) 0 var(--arrowlength);
+    border-color: var(--color) transparent transparent transparent;
+    bottom: calc(-1 * var(--arrowlength));
+}
+
+[data-popper-placement^="bottom"] > #arrow {
+    border-width: 0 var(--arrowlength) var(--arrowlength) var(--arrowlength);
+    border-color: transparent transparent var(--color) transparent;
+    top: calc(-1 * var(--arrowlength));
+}
+
+[data-popper-placement^="left"] > #arrow {
+    border-width: var(--arrowlength) 0 var(--arrowlength) var(--arrowlength);
+    border-color: transparent transparent transparent var(--color);
+    right: calc(-1 * var(--arrowlength));
+}
+
+[data-popper-placement^="right"] > #arrow {
+    border-width: var(--arrowlength) var(--arrowlength) var(--arrowlength) 0;
+    border-color: transparent var(--color) transparent transparent;
+    left: calc(-1 * var(--arrowlength));
+}
+
+.timeController {
+    width: 250px;
+    font-family: Arial, sans-serif;
+    position: relative;
+    border: 2px solid #ccc;
+    padding: 10px;
+    border-radius: 7px;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 5px 0;
+}
+
+.time-title {
+    font-size: 14px;
+    font-weight: bold;
+    color: #555;
+    letter-spacing: 0.5px;
+    text-align: center;
+    margin-bottom: 10px; /* Space between the title and date display */
+}
+
+.date-display {
+    font-size: 12px;
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+    text-align: center;
+    color: #555;
+    letter-spacing: 0.5px;
+    border: 3px solid #a9a9a9;
+    padding: 3px 10px;
+    border-radius: 7px;
+    margin-bottom: 10px;
+}
+
+.controls-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    border: 2px solid #ccc;
+    border-radius: 100px;
+    overflow: hidden;  /* To apply border radius to inner buttons */
+}
+
+.time-btn {
+    background: none;
+    border: 2px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: color 0.2s, background-color 0.2s;
+    width: 33.33%; /* Split into thirds */
+    padding: 5px 0;
+    text-align: center;
+}
+
+.time-btn:hover {
+    color: #007BFF;
+    background-color: #eaeaea;
+}
+
+.time-btn:focus {
+    outline: none;
+}
+
+/* For the middle button which should be rectangular */
+#playPauseBtn {
+    border-left: 2px solid #ccc;
+    border-right: 2px solid #ccc;
+}
+
