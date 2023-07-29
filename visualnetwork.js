@@ -32,7 +32,7 @@ function addNode() {
     const randomY = Math.random() * (height - 2*nodeRadius);
 
     // Create a new node with the random position
-    const newNode = { id: `Node${nodes.length + 1}`, x: randomX, y: randomY };
+    const newNode = { x: randomX, y: randomY };
     nodes.push(newNode);
 
     // Update the nodes' data binding
@@ -94,6 +94,7 @@ function dragended(event) {
     event.subject.fy = null;
 }
 
+let currentNode;
 simulation.on("tick", () => {
     node.attr("cx", d => {
         d.x = Math.max(nodeRadius, Math.min(width - 2*nodeRadius + 1.5, d.x));
@@ -108,6 +109,10 @@ simulation.on("tick", () => {
         .attr("y1", d => d.source.y)
         .attr("x2", d => d.target.x)
         .attr("y2", d => d.target.y);
+
+    if (currentNode) {
+        popperInstance.update();
+    }
 });
 
 function updateGraph() {

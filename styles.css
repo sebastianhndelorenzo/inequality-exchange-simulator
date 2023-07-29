@@ -224,3 +224,145 @@
     z-index: 9;  /* Below the button, but still above the graph*/
 }
 
+#ui-popup {
+    /* width: 220px; */
+    display: none;
+    border: 1px solid #aaa;
+    border-radius: 3px;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 10px;
+    position: relative;
+    left: 50;
+    top: 50;
+}
+
+#node-info { /*This is for the node popup box*/
+    padding-right: 23px;  /* Adjust this value to your desired padding */
+    padding-left: 3px;
+    margin: 5px 0;
+}
+
+
+.close-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: none;
+    border: none;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.close-button:hover {
+    color: #999;  /* Light gray when hovered */
+}
+
+#closeButton:focus {
+    outline: none;
+}
+
+#arrow {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    position: absolute;
+    --arrowlength: 10px;
+    --color: #909090;
+}
+
+[data-popper-placement^="top"] > #arrow {
+    border-width: var(--arrowlength) var(--arrowlength) 0 var(--arrowlength);
+    border-color: var(--color) transparent transparent transparent;
+    bottom: calc(-1 * var(--arrowlength));
+}
+
+[data-popper-placement^="bottom"] > #arrow {
+    border-width: 0 var(--arrowlength) var(--arrowlength) var(--arrowlength);
+    border-color: transparent transparent var(--color) transparent;
+    top: calc(-1 * var(--arrowlength));
+}
+
+[data-popper-placement^="left"] > #arrow {
+    border-width: var(--arrowlength) 0 var(--arrowlength) var(--arrowlength);
+    border-color: transparent transparent transparent var(--color);
+    right: calc(-1 * var(--arrowlength));
+}
+
+[data-popper-placement^="right"] > #arrow {
+    border-width: var(--arrowlength) var(--arrowlength) var(--arrowlength) 0;
+    border-color: transparent var(--color) transparent transparent;
+    left: calc(-1 * var(--arrowlength));
+}
+
+.timeController {
+    width: 250px;
+    font-family: Arial, sans-serif;
+    position: relative;
+    border: 2px solid #ccc;
+    padding: 10px;
+    border-radius: 7px;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 5px 0;
+}
+
+.time-title {
+    font-size: 14px;
+    font-weight: bold;
+    color: #555;
+    letter-spacing: 0.5px;
+    text-align: center;
+    margin-bottom: 10px; /* Space between the title and date display */
+}
+
+.date-display {
+    font-size: 12px;
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+    text-align: center;
+    color: #555;
+    letter-spacing: 0.5px;
+    border: 3px solid #a9a9a9;
+    padding: 3px 10px;
+    border-radius: 7px;
+    margin-bottom: 10px;
+}
+
+.controls-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    border: 2px solid #ccc;
+    border-radius: 100px;
+    overflow: hidden;  /* To apply border radius to inner buttons */
+}
+
+.time-btn {
+    background: none;
+    border: 2px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: color 0.2s, background-color 0.2s;
+    width: 33.33%; /* Split into thirds */
+    padding: 5px 0;
+    text-align: center;
+}
+
+.time-btn:hover {
+    color: #007BFF;
+    background-color: #eaeaea;
+}
+
+.time-btn:focus {
+    outline: none;
+}
+
+/* For the middle button which should be rectangular */
+#playPauseBtn {
+    border-left: 2px solid #ccc;
+    border-right: 2px solid #ccc;
+}
+

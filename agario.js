@@ -1,11 +1,14 @@
 const agarioNodes = nodes.map(node => ({ ...node }));  // This creates a deep copy of the nodes
 
-agarioNodes.forEach(d => {d.cluster = d.group, d.r= 2*Math.sqrt(d.agent.wealth)})
-
-const clusters = {};
-
 const agarioSvgWidth = width;
 const agarioSvgHeight = height;
+const agarioSvg = d3.select("#agario")
+    .attr("width", agarioSvgWidth)
+    .attr("height", agarioSvgHeight);
+
+agarioNodes.forEach(d => {d.cluster = d.group, d.r= 2*Math.sqrt(d.agent.wealth), d.class="agarioNode"})
+
+const clusters = {};
 
 agarioNodes.forEach(d => {
     if (!clusters[d.group]) {
@@ -31,7 +34,7 @@ Object.keys(clusters).forEach((group, index) => {
 });
 
 // Define a radius around which nodes will spawn relative to the cluster's central point
-const clusterRadius = 50;
+const clusterRadius = 20;
 
 // Set node positions based on their group's cluster center
 agarioNodes.forEach(node => {
@@ -45,10 +48,6 @@ agarioNodes.forEach(node => {
     node.cx = node.x;
     node.cy = node.y;
 });
-
-const agarioSvg = d3.select("#agario")
-    .attr("width", agarioSvgWidth)
-    .attr("height", agarioSvgHeight);
 
 function customCollision() {
     const alpha = 0.4; // fixed for greater rigidity
@@ -136,9 +135,11 @@ const drag = d3.drag()
     .on("drag", dragged)
     .on("end", dragended);
 
+
 function agarioTicked() {
     agarioSvg.selectAll('circle').data(agarioNodes).join(
         enter => enter.append('circle')
+            .attr('class', 'agarioNode')
             .attr('r', d => 2* Math.sqrt(d.agent.wealth))   
             .attr('fill', d => groupDetails[d.group].color)
             .append("title").text(""),
@@ -154,6 +155,11 @@ function agarioTicked() {
         return d.y;
     })
     .select("title").text(d => `Index: ${agarioNodes.indexOf(d)}\nWealth: ${Math.round(d.agent.wealth)}`);
+
+    if (currentNode) {
+        popperInstance.update();
+    }
+
 }
 
 function dragstarted(event, d) {
@@ -177,5 +183,3 @@ function updateAgario() {
     agarioSimulation.nodes(agarioNodes);
     agarioTicked();
 }
-
-//updateAgario()

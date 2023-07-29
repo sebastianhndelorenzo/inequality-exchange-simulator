@@ -8,11 +8,23 @@
 <!-- Bootstrap CSS CDN -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
+<!-- Floating UI and Bootstrap JS CDN -->
+<script src="https://unpkg.com/@floating-ui/core"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- If using a CDN -->
+<script src="https://unpkg.com/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://unpkg.com/@floating-ui/core"></script>
+
+<!-- Custom files -->
+<script src="namelist.js"></script>
+<script src="timemachine.js" defer></script>
 <script src="visualnetwork.js" defer></script> 
-<script src="villageGraph.js" defer></script> 
+<script src="villageGraph.js"></script> 
 <script src="engine.js" defer></script>
-<script src="ui.js" defer></script>
 <script src="agario.js" defer></script>
+<script src="ui.js" defer></script>
 
 <html lang="en">
 <head>
@@ -20,8 +32,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inequality Exchange Simulator</title>
     <link rel="stylesheet" href="styles.css">
-
     <link rel="icon" type="image/png" href="icon.png">
+
 </head>
 <body>
     <div class = "tophalfcontainer">
@@ -38,6 +50,16 @@
                 <button id="keyButton">Key</button>
                 <div id="legend"></div>
             </div>
+        </div>
+    </div>
+
+    <div class="timeController">
+        <span class="time-title">TIME MACHINE</span> 
+        <span class="date-display">Current Date: <span id="dateDisplay">01-01-2023</span></span>
+        <div class="controls-container">
+            <button class="time-btn" id="fastBackwardBtn">⏪</button>
+            <button class="time-btn" id="playPauseBtn">▶️</button>
+            <button class="time-btn" id="fastForwardBtn">⏩</button>
         </div>
     </div>
 
@@ -68,12 +90,13 @@
         <span class="slider-title">Average Interest Rate</span>
         <span class="slider-value">5.0</span>
     </div>
-    
-    
-<!-- jQuery, Popper.js, and Bootstrap JS CDN -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <div id="ui-popup">
+        <button id="closeButton" class="close-button" aria-label="Close popper">&#10005;</button>   
+        <p id="node-info">Node Information</p>
+        <div id="arrow" data-popper-arrow></div>
+    </div>    
+
 </body>
 
 

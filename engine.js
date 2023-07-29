@@ -6,6 +6,13 @@ class Agent{
         this.node.agent = this;
 
         this.wealth = 100;
+        this.name = this.getRandomName();
+    }
+
+    getRandomName() {
+        const randomFirstName = firstnames[Math.floor(Math.random() * firstnames.length)];
+        const randomLastName = lastnames[Math.floor(Math.random() * lastnames.length)];
+        return `${randomFirstName} ${randomLastName}`;
     }
 }
 
@@ -33,9 +40,6 @@ function generateParetoValues(alpha, xm, n) {
 let initialWealths = generateParetoValues(0.8, 10, agents.length);
 function setWealthToPareto() {
     const shuffledWealths = shuffleArray([...initialWealths]); // Shallow copy and shuffle
-    for(let i = 0; i < initialWealths.length; i++){
-        //console.log(shuffledWealths[i])
-    }
     agents.forEach((agent, index) => {
         agent.wealth = shuffledWealths[index];
     });
@@ -121,15 +125,6 @@ if (document.getElementById('connectionSetup').value === 'random'){
     villageConnect();
 }
 
-// Loop update UI checks
-document.getElementById('connectionSetup').addEventListener('change', function() {
-    if (this.value === 'random') {
-        randomConnect();
-    } else if (this.value === 'village') {
-        villageConnect();
-    }
-});
-
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -140,16 +135,19 @@ function shuffleArray(array) {
 
 setWealthToPareto();
 
-initialWealths = initialWealths.sort((a, b) => b - a)
-let totalsum = 0
-for(let i = 0; i < 77; i++){
-    console.log(initialWealths[i])
-    totalsum += initialWealths[i]
+currentDate = new Date(2000, 0, 1)
+setDateDisplay(currentDate);
+
+let gameTick = 0;
+
+function gameLoop() {
+    if (enginePaused) {
+        return;
+    }
+    
+    gameTick++;
+    currentDate.setDate(currentDate.getDate() + 1)
+    setDateDisplay(currentDate)
 }
-let fewsum = 0
-for(let i = 0; i < 16; i++){
-    fewsum += initialWealths[i]
-}
-console.log('__________')
-console.log(totalsum * 0.8)
-console.log(fewsum)
+
+const gameLoopInterval = setInterval(gameLoop, 100); 
