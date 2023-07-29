@@ -29,7 +29,3 @@ function setDateDisplay(date) {
     const dateElem = document.getElementById('dateDisplay');
     dateElem.textContent = formatDate(date);
 }
-
-// Example usage:
-const newDate = new Date(2023, 3, 12);
-setDateDisplay(newDate);
