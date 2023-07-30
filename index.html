@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <! Import three.js, d3.js, styles.css, script.js>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -105,4 +106,108 @@
 </body>
 
 
+=======
+<!DOCTYPE html>
+<! Import three.js, d3.js, styles.css, script.js>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://d3js.org/d3.v6.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.0.0/d3.min.js"></script>
+<link rel="stylesheet" href="styles.css">
+
+<!-- Bootstrap CSS CDN -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<!-- Floating UI and Bootstrap JS CDN -->
+<script src="https://unpkg.com/@floating-ui/core"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- If using a CDN -->
+<script src="https://unpkg.com/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://unpkg.com/@floating-ui/core"></script>
+
+<!-- Custom files -->
+<script src="namelist.js"></script>
+<script src="timemachine.js" defer></script>
+<script src="visualnetwork.js" defer></script> 
+<script src="villageGraph.js"></script> 
+<script src="engine.js" defer></script>
+<script src="agario.js" defer></script>
+<script src="ui.js" defer></script>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inequality Exchange Simulator</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="icon.png">
+
+</head>
+<body>
+    <div class = "tophalfcontainer">
+        <div id="agarioContainer">
+            <h3>Relative Wealth</h3>
+            <svg id="agario"></svg>
+        </div>
+
+        <div id="graphContainer" style="position: relative;">
+            <h3>Network</h3>
+            <div id="graphInnerContainer" style="position: relative;">
+                <svg id="network"></svg>
+
+                <button id="keyButton">Key</button>
+                <div id="legend"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="timeController">
+        <span class="time-title">TIME MACHINE</span> 
+        <span class="date-display">Current Date: <span id="dateDisplay">01-01-2023</span></span>
+        <div class="controls-container">
+            <button class="time-btn" id="fastBackwardBtn">⏪</button>
+            <button class="time-btn" id="playPauseBtn">▶️</button>
+            <button class="time-btn" id="fastForwardBtn">⏩</button>
+        </div>
+    </div>
+
+    <div class="button-container">
+        <button class="graph-button" id="button">Do Nothing</button>
+    </div>
+
+    <div class="dropdown-container">
+        <span class="dropdown-title">Relationship Options</span>
+        <div class="select-container">
+            <select id="connectionSetup">
+                <option value="village">Village</option>
+                <option value="random">Random</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Slider 1 -->
+    <div class="slider-container">
+        <input type="range" class="slider" id="incomeTaxSlider" step="1" min="0" max="60">
+        <span class="slider-title">Income Tax</span>
+        <span class="slider-value">30</span>
+    </div>
+
+    <!-- Slider 2 -->
+    <div class="slider-container">
+        <input type="range" class="slider" id="interestRateSlider" step="0.1" min="0" max="10">
+        <span class="slider-title">Average Interest Rate</span>
+        <span class="slider-value">5.0</span>
+    </div>
+
+    <div id="ui-popup">
+        <button id="closeButton" class="close-button" aria-label="Close popper">&#10005;</button>   
+        <p id="node-info">Node Information</p>
+        <div id="arrow" data-popper-arrow></div>
+    </div>    
+
+</body>
+
+
+>>>>>>> 1d3e3665e7ae60d6168cb7a472d981aabbd183eb
 </html>
