@@ -37,13 +37,15 @@ function generateParetoValues(alpha, xm, n) {
     }
     return values;
 }
-let initialWealths = generateParetoValues(0.8, 10, agents.length);
+let initialWealths = generateParetoValues(0.78, 10, agents.length);
 function setWealthToPareto() {
     const shuffledWealths = shuffleArray([...initialWealths]); // Shallow copy and shuffle
     agents.forEach((agent, index) => {
         agent.wealth = shuffledWealths[index];
     });
 }
+
+function totalGlobalWealth() { return agents.reduce((total, agent) => total + agent.wealth, 0);}
 
 // Connects two nodes
 function addLink(node1, node2) {
@@ -107,7 +109,6 @@ function villageConnect(){
         agents[i].node = villageNodes[i];
         villageNodes[i].agent = agents[i];
     }
-
     nodes = villageNodes;
     // Connect the nodes
     for (let i = 0; i < villageLinks.length; i++) {
@@ -134,20 +135,14 @@ function shuffleArray(array) {
 }
 
 setWealthToPareto();
-
-currentDate = new Date(2000, 0, 1)
+currentDate = new Date(2000, 0, 1);
 setDateDisplay(currentDate);
 
-let gameTick = 0;
+//////////////////////////////////////////////
+let element = document.getElementById("reserves-display");
+let textContent = element.textContent || element.innerText; // innerText for older browsers
+let numericalValue = parseFloat(textContent.replace("£", "").trim());
+let reserves = numericalValue;
 
-function gameLoop() {
-    if (enginePaused) {
-        return;
-    }
-    
-    gameTick++;
-    currentDate.setDate(currentDate.getDate() + 1)
-    setDateDisplay(currentDate)
-}
 
-const gameLoopInterval = setInterval(gameLoop, 100); 
+

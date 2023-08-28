@@ -3,6 +3,9 @@ const playPauseBtn = document.getElementById('playPauseBtn');
 
 let enginePaused = true;
 
+let timeSpeed = 1; // constant affecting time speed which we control using UI
+let gameLoopInterval = setInterval(gameLoop, 400)
+
 // Add a click event listener
 playPauseBtn.addEventListener('click', function() {
     // Check if the current symbol is the play symbol
@@ -13,6 +16,30 @@ playPauseBtn.addEventListener('click', function() {
         playPauseBtn.textContent = '▶️';
         enginePaused = true;
     }
+});
+
+const timeSpeedToInterval = { // maps timeSpeed to the time in ms between loop executes
+    1 : 200, 
+    2 : 25, 
+    3 : 0
+}
+
+fastBackwardBtn.addEventListener('click', function() {
+    if (timeSpeed > 1) {
+        timeSpeed -= 1;
+    }
+
+    clearInterval(gameLoopInterval)
+    gameLoopInterval = setInterval(gameLoop, timeSpeedToInterval[timeSpeed])
+});
+
+fastForwardBtn.addEventListener('click', function() {
+    if (timeSpeed < 3) {
+        timeSpeed += 1;
+    }
+
+    clearInterval(gameLoopInterval)
+    gameLoopInterval = setInterval(gameLoop, timeSpeedToInterval[timeSpeed])
 });
 
 function formatDate(inputDate) {

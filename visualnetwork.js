@@ -11,7 +11,7 @@ document.getElementById('graphContainer').style.height = height + 'px';
 // Specify the color scale
 const color = d3.scaleOrdinal(d3.schemeCategory10);
 
-let nodeRadius = 4;
+let nodeRadius = 4; // radius of NETWORK nodes
 
 // Maps each group id to the details of their village
 const groupDetails = {
@@ -71,7 +71,7 @@ let node = svg.append("g")
     .data(nodes)
     .join("circle")
     .attr("class", "node")
-    .attr("r", nodeRadius) //.attr("fill", d => color(d.group))
+    .attr("r", nodeRadius)
     .call(d3.drag()
         .on("start", dragstarted)
         .on("drag", dragged)
@@ -97,11 +97,11 @@ function dragended(event) {
 let currentNode;
 simulation.on("tick", () => {
     node.attr("cx", d => {
-        d.x = Math.max(nodeRadius, Math.min(width - 2*nodeRadius + 1.5, d.x));
+        d.x = Math.max(nodeRadius +(1.5), Math.min(width - 2*nodeRadius + (1), d.x)); // prevent nodes going outside window bounds - brackets indicate buffer
         return d.x;
     })
     .attr("cy", d => {
-        d.y = Math.max(nodeRadius, Math.min(height - 2*nodeRadius + 1.5, d.y));
+        d.y = Math.max(nodeRadius +(1.5), Math.min(height - 2*nodeRadius +(1), d.y)); // prevent nodes going outside window bounds
         return d.y;
     });
 

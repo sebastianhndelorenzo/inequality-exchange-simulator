@@ -1,6 +1,6 @@
 const agarioNodes = nodes.map(node => ({ ...node }));  // This creates a deep copy of the nodes
 
-const agarioSvgWidth = width;
+const agarioSvgWidth = width; // sets agario dimensions to match network dimensions
 const agarioSvgHeight = height;
 const agarioSvg = d3.select("#agario")
     .attr("width", agarioSvgWidth)
@@ -50,7 +50,7 @@ agarioNodes.forEach(node => {
 });
 
 function customCollision() {
-    const alpha = 0.4; // fixed for greater rigidity
+    const alpha = 0.2; // fixed for greater rigidity
     const padding1 = 2; // separation between same-group node circumferences
     const padding2 = 6; // separation between different-group node circumferences
     let nodes;
@@ -143,23 +143,23 @@ function agarioTicked() {
             .attr('r', d => 0.8 * 2*Math.sqrt(d.agent.wealth))   
             .attr('fill', d => groupDetails[d.group].color)
             .append("title").text(""),
-        update => update.call(drag),
+        update => update
+            .call(drag),
         exit => exit.remove()
     )
     .attr("cx", d => {
-        d.x = Math.max(d.r, Math.min(agarioSvgWidth -4 - d.r, d.x));
+        d.x = Math.max(d.r +(2), Math.min(agarioSvgWidth -2 -(2) - d.r, d.x));
         return d.x;
     })
     .attr("cy", d => {
-        d.y = Math.max(d.r, Math.min(agarioSvgHeight -4 - d.r, d.y));
+        d.y = Math.max(d.r +(2), Math.min(agarioSvgHeight -2 -(2) - d.r, d.y));
         return d.y;
     })
-    .select("title").text(d => `Index: ${agarioNodes.indexOf(d)}\nWealth: ${Math.round(d.agent.wealth)}`);
+    .select("title").text(d => `Index: ${agarioNodes.indexOf(d)}\nId: ${d.id}\nWealth: ${Math.round(d.agent.wealth)}`);
 
     if (currentNode) {
         popperInstance.update();
     }
-
 }
 
 function dragstarted(event, d) {
@@ -182,4 +182,12 @@ function dragended(event, d) {
 function updateAgario() {
     agarioSimulation.nodes(agarioNodes);
     agarioTicked();
+}
+
+let area_constant = 2.56 * totalGlobalWealth(); //19268 // 2.56 * initial total_wealth
+function updateAgarioSizes(total_wealth) {
+    agarioSvg.selectAll('circle.agarioNode')
+        .data(agarioNodes)  // Bind the data
+        .attr('r', d => Math.sqrt(d.agent.wealth/total_wealth * area_constant));  // Update the radius based on agent's wealth, normalized so that total area is constant
+
 }
