@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<! Import three.js, d3.js, styles.css, script.js>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://d3js.org/d3.v6.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.0.0/d3.min.js"></script>
+<link rel="stylesheet" href="styles.css">
+
+<!-- Bootstrap CSS CDN -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css" rel="stylesheet">
+
+
+<!-- Floating UI and Bootstrap JS CDN -->
+<script src="https://unpkg.com/@floating-ui/core"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script src="https://unpkg.com/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://unpkg.com/@floating-ui/core"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/numjs/0.14.2/numjs.js"></script>
+
+<!-- SweetAlert2 CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
+<!-- SweetAlert2 JS -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<!-- Custom files -->
+<script src="namelist.js"></script>
+<script src="timemachine.js" defer></script>
+<script src="visualnetwork.js" defer></script> 
+<script src="villageGraph.js"></script> 
+<script src="engine.js" defer></script>
+<script src="agario.js" defer></script>
+<script src="news.js" defer></script>
+<script src="ui.js" defer></script>
+<script src="economy.js" defer></script>
+<script src="gameloop.js"></script>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inequality Exchange Simulator</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="images/icon.png">
+
+</head>
+<body>
+    <div class = "tophalfcontainer">
+        <div id="agarioContainer">
+            <h4 id="graphTitle">Relative Wealth</h4>
+            <svg id="agario"></svg>
+        </div>
+
+        <div id="graphContainer" style="position: relative;">
+            <h4 id="graphTitle">Network</h4>
+            <div id="graphInnerContainer" style="position: relative;">
+                <svg id="network"></svg>
+
+                <button id="keyButton">Key</button>
+                <div id="legend"></div>
+            </div>
+        </div>
+
+        <div id="newsContainer">
+            <h4 id="graphTitle">News</h4>
+            <div id="newspaper">
+                <div id="veryTopText">
+                    <p>About   Ads   DEI   Tips</p>
+                    <div class="login-container">
+                        <p class="log-in">Log in</p>
+                        <i class="bi bi-person"></i>
+                    </div>                    
+                </div>
+                <div id="banner">
+                    <div class="horizontal-bar" id="firstbar"></div>
+
+                    <i class="bi bi-list"></i>
+                    <div id="searchBar">
+                        <i class="bi bi-search"></i>
+                        <p id="searchtext">Search</p>
+                    </div>
+                    <div id="subscribeButton">
+                        <p id="subscribeText">Subscribe</p>
+                    </div>
+                    <div id="donateButton">
+                        <p id="donateText">Donate</p>
+                    </div>
+                    <p id="newspaperTitle">The Lilliput Daily</p>
+                    
+                    <div class="horizontal-bar"></div>
+                </div>
+                <div id="toolbar">
+                    <p id="toolbarText">News     Sports     <span style='color:#8C1515;font-weight: bold;'>Politics</span>     Opinion     Arts & Life     Books     Podcast     Science     Archive</p>
+                    <div class="horizontal-bar black-bar"></div>
+                    <div class="horizontal-bar black-bar"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="inline-container">
+        <div class="left-sliders" style="position: absolute;left:105px;top:396px;">
+            <div class="slider-container">
+                <input type="range" class="slider" id="interestRateSlider" step="0.1" min="0" max="10">
+                <span class="slider-title">Average Annual Interest</span>
+                <span class="slider-value">5.0</span>
+            </div>
+    
+            <div class="slider-container" id="income-container" style="height:91px">
+                <input type="range" class="slider" id="incomeTaxSlider" step="1" min="0" max="60">
+                <span class="slider-title">Income Tax</span>
+                <span class="slider-value">30</span>
+                <div id="hidden-text-1">
+                    <p style="position: absolute; top:-9px;left:5px;">Annual Rate</p>
+                    <p style="position: absolute; top:33px;left:5px;">Top % Paying</p>
+                </div>
+    
+                <div class="advanced-sliders" id="advancedIncomeSliders">
+                    <input type="range" class="slider" id="percentPayingIncomeTax" value = "100" step="1" min="0" max="100" style="position: absolute; top:82px;">
+                    <span class="slider-title">Advanced Slider 1</span>
+                    <span class="slider-value" style="top:50px">100</span>
+                </div>
+            
+                <button class="toggleAdvanced" id="incomeToggleAdvanced" style="position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%);">Advanced</button>
+            </div>
+            
+            <div class="slider-container" id="wealthtax-container" style="height:91px">
+                <input type="range" class="slider" id="wealthTaxSlider" value = "0.0" step="0.1" min="0" max="10">
+                <span class="slider-title">Wealth Tax</span>
+                <span class="slider-value">0.0</span>
+                <div id="hidden-text-2">
+                    <p style="position: absolute; top:-9px;left:5px;">Annual Rate</p>
+                    <p style="position: absolute; top:33px;left:5px;">Top % Paying</p>
+                </div>
+    
+                <div class="advanced-sliders" id="advancedWealthSliders">
+                    <input type="range" class="slider" id="percentPayingWealthTax" value="100" step="1" min="0" max="100" style="position: absolute; top:82px;">
+                    <span class="slider-title">Advanced Slider 1</span>
+                    <span class="slider-value" style="top:50px">100</span>
+                </div>
+            
+                <button class="toggleAdvanced" id="wealthToggleAdvanced" style="position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%);">Advanced</button>
+            </div>
+        </div>
+
+        <div class="timeController">
+            <span class="time-title">TIME MACHINE</span> 
+
+            <div class="date-display">
+                <span class="date-prefix">Current Date:</span> 
+                <span id="dateDisplay">01-01-2000</span>
+            </div>
+            
+            <div class="controls-container">
+                <button class="time-btn" id="fastBackwardBtn">
+                    <img src="images/fastBackward.png" style="height: 18px; width: 18px;">
+                </button>
+                <button class="time-btn" id="playPauseBtn">
+                    <img src="images/play.png" style="height: 18px; width: 18px;">
+                </button>
+                <button class="time-btn" id="fastForwardBtn">
+                    <img src="images/fastForward.png" style="height: 18px; width: 18px;">
+                </button>
+            </div>
+
+            
+        </div>
+
+        <div class="button-container">
+            <button class="graph-button" id="creditsButton">Credits</button>
+            <button class="graph-button" id="resetButton">Reset</button>
+        </div>
+
+        <div class="digit-display" style="width:150px" id="gini-container">
+            <div class="digit-title-container">
+                <div class="digit-title">Gini Coefficient</div>
+                <button class="question-btn" id="gini-question">?</button>
+            </div>
+            <div class="digit-value" id="gini-display">0.755</div>
+        </div>    
+
+        <div class="digit-display" style="width:150px;height:70px;" id="pareto-container">
+            <div class="digit-title-container">
+                <div class="digit-title" style="width:110px">% Of Wealth Owned By The Top 20%</div>
+                <button class="question-btn" style="margin-left:-1px" id="pareto-question">?</button>
+            </div>
+            <div class="digit-value" id="pareto-display" style="width:35px">80.8</div>
+        </div>    
+
+        <div class="digit-display" style="width:130px" id="reserves-container">
+            <div class="digit-title-container">
+                <div class="digit-title" style="width:110px">Financial Reserves</div>
+                <button class="question-btn" style="margin-left:-4px" id="reserves-question">?</button>
+            </div>
+            <div class="digit-value" id="reserves-display" style="width:40px">£100</div>
+        </div>    
+
+    </div>
+
+    
+    
+    <div class="dropdown-container" style="position: absolute;top:1000px;">
+        <span class="dropdown-title">Relationship Options</span>
+        <div class="select-container">
+            <select id="connectionSetup">
+                <option value="village">Village</option>
+                <option value="random">Random</option>
+            </select>
+        </div>
+    </div>
+
+    <div id="ui-popup">
+        <button id="closeButton" class="close-button" aria-label="Close popper">&#10005;</button>   
+        <p id="node-info">Node Information</p>
+        <div id="arrow" data-popper-arrow></div>
+    </div>    
+
+</body>
+
+
+</html>
