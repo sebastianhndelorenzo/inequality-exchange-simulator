@@ -1,3 +1,6 @@
+// initialWealths - used to set actor wealths according to the Pareto distribution
+// originalWealths - used by the reset button to reset wealths
+
 class Agent{
     constructor(){
         this.node = addNode()
@@ -118,6 +121,7 @@ function villageConnect(){
     updateGraph();
     svg.selectAll(".node").style("fill", d => groupDetails[d.group].color);
 }
+////////////////////////////////////////////////
 
 // One-time checks on startup
 if (document.getElementById('connectionSetup').value === 'random'){
@@ -137,6 +141,11 @@ function shuffleArray(array) {
 setWealthToPareto();
 currentDate = new Date(2000, 0, 1);
 setDateDisplay(currentDate);
+
+let originalWealths = agents.map(agent => agent.wealth);
+console.log(originalWealths)
+console.log(agents[0].name)
+console.log(groupDetails[agents[0].node.group].color)
 
 //////////////////////////////////////////////
 let element = document.getElementById("reserves-display");

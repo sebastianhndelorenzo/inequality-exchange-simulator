@@ -109,6 +109,10 @@ document.getElementById('connectionSetup').addEventListener('change', function()
     }
 });
 
+document.getElementById('resetButton').addEventListener('click', function() {
+    totalGlobalReset();
+})
+
 ////////////////////////////////////
 document.getElementById('gini-question').addEventListener('click', function() {
     Swal.fire({
@@ -137,6 +141,20 @@ document.getElementById('reserves-question').addEventListener('click', function(
         width: '400px',
         html: `
             The amount of money avaliable for redistribution, infrastructure, and job training schemes.`
+    });
+});
+
+document.getElementById('creditsButton').addEventListener('click', function() {
+    Swal.fire({
+        showConfirmButton: false,
+        title: 'Credits',
+        width: '620px',
+        html: `<strong>HTML, CSS, Javascript:</strong> Sebastian DeLorenzo
+        <br><strong>Actor Network:</strong> The Stanford GraphBase by Professor Donald Knuth 
+        <a href="https://www-cs-faculty.stanford.edu/~knuth/sgb.html">https://www-cs-faculty.stanford.edu/~knuth/sgb.html</a> 
+        <a href="http://ftp.cs.stanford.edu/pub/sgb/jean.dat">http://ftp.cs.stanford.edu/pub/sgb/jean.dat</a> <br>
+        <strong>Newspaper Design:</strong> Inspired by <em>The Stanford Daily</em> <br> <a href="https://stanforddaily.com/">https://stanforddaily.com/</a>
+        <br><strong>Old English Font:</strong> <a href="https://www.onlinewebfonts.com/download/f3258385782c4c96aa24fe8b5d5f9782">https://www.onlinewebfonts.com</a>`
     });
 });
 

@@ -100,3 +100,16 @@ function giniCoefficient() {
 
 let total_wealth = totalGlobalWealth();
 updateGiniDisplay();
+
+function totalGlobalReset() {
+    if (enginePaused == false) {
+        document.getElementById('playPauseBtn').click();
+    }
+    setDateDisplay(startDate)
+    gameTick = 0;
+
+    // Reset each agent's wealth to its original value
+    agents.forEach((agent, index) => {
+        agent.wealth = originalWealths[index];
+    });
+}

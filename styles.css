@@ -43,22 +43,33 @@
 
 /* Button Container */
 .button-container {
+    position: absolute;
     display: flex;
     /*justify-content: center;*/ /*Decides the button's horizontal position*/
-    margin-top: 20px; /* Spacing between the graph and buttons */
+    left: 553px;
+    top: 516px;
     justify-content: left
+}
+
+#creditsButton {
+    background-color: grey;
+}
+
+#resetButton {
+    background-color: red;
 }
 
 /* Button Styles */
 .graph-button {
     background-color: #6699CC;
+    flex: 1;
     border: none;
     border-radius: 5px;
     color: white;
     cursor: pointer;
-    font-size: 16px;
-    margin: 0 5px; /* Space between buttons */
-    padding: 10px 20px; /* Button padding */
+    font-size: 14px;
+    margin: 0 3px; /* Space between buttons */
+    padding: 5px 10px; /* Button padding */
     transition: background-color 0.3s ease; /* Smooth color transition */
 }
 
@@ -366,7 +377,13 @@
     width: 33.33%; /* Split into thirds */
     padding: 5px 0;
     text-align: center;
+    transform: translateY(-1px);
 }
+
+.time-btn img {
+    vertical-align: middle;
+}
+
 
 .time-btn:hover {
     background-color: #eaeaea;

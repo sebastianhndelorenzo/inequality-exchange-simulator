@@ -6,17 +6,23 @@ let enginePaused = true;
 let timeSpeed = 1; // constant affecting time speed which we control using UI
 let gameLoopInterval = setInterval(gameLoop, 400)
 
+let startDate = new Date("2000-01-01");
+
 // Add a click event listener
 playPauseBtn.addEventListener('click', function() {
-    // Check if the current symbol is the play symbol
-    if (playPauseBtn.textContent.trim() === '▶️') {
-        playPauseBtn.textContent = '⏸️';
+    // Get the current image source
+    const currentSrc = playPauseBtn.querySelector('img').getAttribute('src');
+    
+    // Check if the current image source is the play image
+    if (currentSrc === 'images/play.png') {
+        playPauseBtn.querySelector('img').setAttribute('src', 'images/pause.png');
         enginePaused = false;
     } else {
-        playPauseBtn.textContent = '▶️';
+        playPauseBtn.querySelector('img').setAttribute('src', 'images/play.png');
         enginePaused = true;
     }
 });
+
 
 const timeSpeedToInterval = { // maps timeSpeed to the time in ms between loop executes
     1 : 200, 
